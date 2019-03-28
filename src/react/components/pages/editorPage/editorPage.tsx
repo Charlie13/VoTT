@@ -27,6 +27,7 @@ import CanvasHelpers from "./canvasHelpers";
 import { tagColors } from "../../../../common/tagColors";
 import { ToolbarItemName } from "../../../../registerToolbar";
 import { SelectionMode } from "vott-ct/lib/js/CanvasTools/Interface/ISelectorSettings";
+import { LocalActiveLearningProxy } from "../../../../providers/activeLearning/activeLearningProxy";
 
 /**
  * Properties for Editor Page
@@ -120,6 +121,9 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
 
         // Load standard TensorFlow.js SSD Model trained on COCO dataset
         this.model = await ObjectDetection.load("mobilenet_v2");
+
+        const activeLearningProxy = new LocalActiveLearningProxy();
+        console.log(await activeLearningProxy.testMethod("Jacopo"));
 
         // this.remote = (window as any).require("electron").remote as Electron.Remote;
         // this.model = await this.remote.require("electron/activelearning/objectDetection")
