@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { RefObject } from "react";
 import * as shortid from "shortid";
 import "@tensorflow/tfjs";
-import * as cocoSsd from "@tensorflow-models/coco-ssd";
+import * as ObjectDetection from "../../../../electron/activelearning/objectDetection";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -100,7 +100,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
     };
 
     // TensorFlow model used for Active Learning
-    private model: any;
+    private model: ObjectDetection.ObjectDetection;
 
     private loadingProjectAssets: boolean = false;
     private toolbarItems: IToolbarItemRegistration[] = ToolbarItemFactory.getToolbarItems();
@@ -116,7 +116,7 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
         }
 
         // Load standard TensorFlow.js SSD Model trained on COCO dataset
-        this.model = await cocoSsd.load("mobilenet_v2"); // Use V2 version
+        this.model = await ObjectDetection.load("mobilenet_v2");
     }
 
     public async componentDidUpdate() {
