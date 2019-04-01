@@ -6,6 +6,7 @@ import { strings, addLocValues } from "../../../../common/strings";
 import CustomFieldTemplate from "../../common/customField/customFieldTemplate";
 import ConnectionProviderPicker from "../../common/connectionProviderPicker/connectionProviderPicker";
 import { ProtectedInput } from "../../common/protectedInput/protectedInput";
+import { isBrowser } from "../../../../common/hostProcess";
 // tslint:disable-next-line:no-var-requires
 const formSchema = addLocValues(require("./connectionForm.json"));
 // tslint:disable-next-line:no-var-requires
@@ -85,6 +86,21 @@ export default class ConnectionForm extends React.Component<IConnectionFormProps
                     </span>
                 </h3>
                 <div className="m-3 text-light">
+                    { isBrowser() && this.state.providerName === "bingImageSearch" &&
+                    <div className="alert alert-warning" role="alert">
+                        <i className="fas fa-exclamation-circle mr-1" aria-hidden="true"></i>
+                        { strings.connections.imageCorsWarning }
+                    </div>
+                    }
+                    { isBrowser() && this.state.providerName === "azureBlobStorage" &&
+                    <div className="alert alert-warning" role="alert">
+                        <i className="fas fa-exclamation-circle mr-1" aria-hidden="true"></i>
+                        { strings.formatString(
+                            strings.connections.blobCorsWarning,
+                            <a href="https://aka.ms/blob-cors" target="_blank">{strings.connections.azDocLinkText}</a>)
+                        }
+                    </div>
+                    }
                     <Form
                         className={this.state.classNames.join(" ")}
                         showErrorList={false}
