@@ -26,7 +26,7 @@ import CanvasHelpers from "./canvasHelpers";
 import { tagColors } from "../../../../common/tagColors";
 import { ToolbarItemName } from "../../../../registerToolbar";
 import { SelectionMode } from "vott-ct/lib/js/CanvasTools/Interface/ISelectorSettings";
-import { ObjectDetection, load } from "../../../../providers/activeLearning/objectDetection";
+import { ObjectDetection, DetectedObject } from "../../../../providers/activeLearning/objectDetection";
 
 /**
  * Properties for Editor Page
@@ -119,7 +119,8 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
         }
 
         // Load standard TensorFlow.js SSD Model trained on COCO dataset
-        this.model = await load("mobilenet_v2");
+        this.model = new ObjectDetection();
+        await this.model.load("/Users/jacopo/CocoSSD");
     }
 
     public async componentDidUpdate() {
