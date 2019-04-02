@@ -2,6 +2,7 @@ import _ from "lodash";
 import React, { RefObject } from "react";
 import "@tensorflow/tfjs";
 import * as shortid from "shortid";
+import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -99,9 +100,6 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
                     activeLearningSettings: (this.props.project) ? this.props.project.activeLearningSettings : null },
     };
 
-    // Use Electron Remote to load and use TF.js model from main electron process
-    private remote: Electron.Remote;
-
     // TensorFlow model used for Active Learning
     private model: ObjectDetection;
 
@@ -119,8 +117,10 @@ export default class EditorPage extends React.Component<IEditorPageProps, IEdito
         }
 
         // Load standard TensorFlow.js SSD Model trained on COCO dataset
+        const infoId = toast.info(`Loading model...`, { autoClose: false });
         this.model = new ObjectDetection();
         await this.model.load("/Users/jacopo/CocoSSD");
+        toast.dismiss(infoId);
     }
 
     public async componentDidUpdate() {
