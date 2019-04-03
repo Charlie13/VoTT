@@ -201,13 +201,13 @@ export interface IProjectVideoSettings {
  * @name - Video Tagging Settings for the project
  * @description - Defines the video settings within a VoTT project
  * @member modelPath
- * @member autolabel
- * @member predictClass
+ * @member autoDetect
+ * @member predictTag
  */
 export interface IProjectActiveLearningSettings {
     modelPath: string;
-    autolabel: boolean;
-    predictClass: boolean;
+    autoDetect: boolean;
+    predictTag: boolean;
 }
 
 /**

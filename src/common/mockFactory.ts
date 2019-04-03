@@ -265,7 +265,7 @@ export default class MockFactory {
             targetConnection: connection,
             tags: MockFactory.createTestTags(tagCount),
             videoSettings: MockFactory.createVideoSettings(),
-            activeLearningSettings: {modelPath: "", autolabel: false, predictClass: false},
+            activeLearningSettings: {modelPath: "", autoDetect: false, predictTag: false},
             autoSave: true,
         };
     }
